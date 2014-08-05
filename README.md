@@ -6,6 +6,10 @@ Made with my mentor ad [Block](http://bloc.io).
 
 [tyler-bloccit](http://tyler-bloccit.herokuapp.com/)
 
+SETUP:
+
+Please review config/application.example.yml for variables to use in production for the config/aplication.yml which you will need to create.
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
