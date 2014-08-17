@@ -16,5 +16,17 @@
     <% end %>
   </div>
 </div>
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+    <div class="media">
+      <div class="media-body">
+        
 
+        <p><%= comment.body %> <small><i>by <%= comment.user.name %></i></small></p>
+      </div>
+    </div>
+    <% end %>
+<% if current_user %>
+<%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+<% end %>
  
