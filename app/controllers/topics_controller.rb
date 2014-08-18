@@ -1,4 +1,20 @@
 class TopicsController < ApplicationController
+  
+    def destroy
+      @topic = Topic.find(params[:id])
+      name = @topic.name
+
+      authorize @topic
+      if @topic.destroy
+        flash[:notice] = "\"#{name}\" was deleted successfully."
+        redirect_to topics_path
+      else
+        flash[:error] = "There was an error deleting the topic."
+        render :show
+      end
+    end
+ 
+
   def index
     @topics = Topic.paginate(page: params[:page], per_page: 10)
     authorize @topics
@@ -42,6 +58,7 @@ class TopicsController < ApplicationController
       flash[:error] = "Error saving topic.  Please try again."
       render :edit
     end
+
   end
 
 private
