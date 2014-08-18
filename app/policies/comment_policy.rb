@@ -1,7 +1,10 @@
 class CommentPolicy < ApplicationPolicy
 
-def index?
+  def index?
   true
-end
+  end
 
+  def destroy?
+    user.present? && (record.user == user || user.role?(:admin) || user.role?(:moderator))
+  end
 end
