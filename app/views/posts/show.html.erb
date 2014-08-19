@@ -28,12 +28,12 @@
 
         <p><%= comment.body %> <small><i>by <%= comment.user.name %></i>
       <% if policy(comment).destroy? %>
-        | <%= link_to "Delete", [@topic, @post, comment], method: :delete %></small></p>
+        | <%= link_to "Delete", [@post, comment], method: :delete %></small></p>
       <% end %>
       </div>
     </div>
     <% end %>
 <% if current_user %>
-<%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+<%= render partial: 'comments/form', locals: { post: @post, comment: @comment } %>
 <% end %>
  
