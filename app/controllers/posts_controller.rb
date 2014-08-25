@@ -1,8 +1,26 @@
 class PostsController < ApplicationController
 
+  def destroy
+    @topic = Topic.find(params[:topic_id])
+    @post = Post.find(params[:id])
+    title = @post.title
+    authorize @post
+
+    if @post.destroy
+      flash[:notice] = "\"#{title}\" was deleted successfully."
+      redirect_to @topic
+    else
+      flash[:error] = "There was an error deleting the post."
+      render :show
+    end
+  end
+
   def show
     @post = Post.find(params[:id])
     @topic = Topic.find(params[:topic_id])
+    @comments = @post.comments
+    @comment = Comment.new
+    authorize @topic
   end
 
   def new
@@ -17,7 +35,10 @@ class PostsController < ApplicationController
     @post.topic = @topic
     authorize @post
     
-    if @post.save
+    if @post.save_with_initial_vote
+    #@post.save
+       #@post.create_vote
+
       flash[:notice] = "Post was saved."
       redirect_to [@topic, @post]
     else
@@ -50,7 +71,7 @@ class PostsController < ApplicationController
 private
 
 def post_params
-  params.require(:post).permit(:title, :body)
+  params.require(:post).permit(:title, :body, :image)
 end
 
 

@@ -1,15 +1,56 @@
 class Post < ActiveRecord::Base
-  has_many :comments
+  has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
   belongs_to :user
     belongs_to :topic
+  mount_uploader :image, ImageUploader
+
+<<<<<<< HEAD
+
+  def up_votes
+     votes.where(value: 1).count
+   end
+
+   def down_votes
+     votes.where(value: -1).count
+   end
+
+   def points
+    votes.sum(:value)
+  end
+
+  def update_rank
+    age = (created_at - Time.new(1970,1,1)) / (60 * 60 * 24) # 1 day in seconds
+    new_rank = points + age
+
+    update_attribute(:rank, new_rank)
+  end
+
+  
 
   default_scope { order('created_at DESC') } 
+=======
+  def up_votes
+    votes.where(value: 1).count
+  end
+
+  def down_votes
+    votes.where(value: -1).count
+  end
+
+  def points
+    votes.sum(:value)
+  end
+
+  default_scope { order('rank DESC') }
+>>>>>>> master
 
 validates :title, length: { minimum: 5 }, presence: true
 validates :body, length: { minimum: 20 }, presence: true
 validates :topic, presence: true
 validates :user, presence: true
 
+<<<<<<< HEAD
 def markdown_title
   render_as_markdown title
 end
@@ -27,4 +68,31 @@ def render_as_markdown(text)
   (redcarpet.render text).html_safe
 end
 
+=======
+
+<<<<<<< HEAD
+  def create_vote
+    user.votes.create(value: 1, post: self)
+  end
+
+  def save_with_initial_vote
+    ActiveRecord::Base.transaction do 
+    user.votes.create(value: 1, post: self)
+    save
+  end
+end
+=======
+def update_rank
+  age = (created_at - Time.new(1970,1,1)) / (60 * 60 * 24) # 1 day in seconds
+  new_rank = points + age
+
+  update_attribute(:rank, new_rank)
+end
+
+
+  def create_vote
+     user.votes.create(value: 1, post: self)
+  end
+>>>>>>> master
+>>>>>>> master
 end
