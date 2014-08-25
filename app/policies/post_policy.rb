@@ -5,7 +5,8 @@ def index?
 end
 
 def destroy?
-  user.present? && (record.user == user || user.role?(:admin) || user.role?(:moderator))
+  #user.present? && (record.user == user || user.role?(:admin) || user.role?(:moderator))
+  can_moderate?
 end
 
 end
