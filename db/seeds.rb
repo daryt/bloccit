@@ -31,10 +31,17 @@ topics = Topic.all
     body:  Faker::Lorem.paragraph
     )
 
+<<<<<<< HEAD
+   # set the created_at to a time within the past year
+   post.update_attributes!(created_at: rand(10.minutes .. 1.year).ago)
+   post.create_vote
+   post.update_rank
+=======
   #set the created_at to a time within the past year
   post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
   post.create_vote
   post.update_rank
+>>>>>>> master
 end
 
 posts = Post.all  
