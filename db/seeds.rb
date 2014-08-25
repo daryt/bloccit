@@ -36,6 +36,7 @@ topics = Topic.all
    post.create_vote
    post.update_rank
 end
+
 posts = Post.all  
 
 # Create Comments
