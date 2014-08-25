@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140822061630) do
+=======
+ActiveRecord::Schema.define(version: 20140820022122) do
+>>>>>>> master
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -72,9 +76,15 @@ ActiveRecord::Schema.define(version: 20140822061630) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "votes", force: true do |t|
+<<<<<<< HEAD
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "value"
+=======
+    t.integer  "value"
+    t.integer  "user_id"
+    t.integer  "post_id"
+>>>>>>> master
     t.datetime "created_at"
     t.datetime "updated_at"
   end
