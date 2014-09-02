@@ -29,6 +29,7 @@ gem 'fog'
 
 group :test do
   gem 'rspec-rails'
+  gem 'capybara'
 end
 
 gem 'will_paginate', '~> 3.0.5'
