@@ -35,6 +35,7 @@ require 'rails_helper'
        @comment.save
      end
    end
+   
    context "without permission" do 
 
     before { @user.update_attribute(:email_favorites, false) }
