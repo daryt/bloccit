@@ -27,6 +27,8 @@ gem 'mini_magick'
 
 gem 'fog'
 
+gem 'newrelic_rpm'
+
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
