@@ -3,6 +3,10 @@
 <div class="row">
   <div class="col-md-8">
          <%= render partial: 'votes/voter', locals: { post: @post } %>
+         <h1>
+          <%= image_tag(@post.image.thumb.url) if @post.image? %>
+          <%= markdown @post.title %>
+        </h1>
     <small>
       <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
       submitted <%= time_ago_in_words(@post.created_at) %> ago by
@@ -30,20 +34,15 @@
   </div>
 </div>
 <h2>Comments</h2>
-<% @post.comments.each do |comment| %>
-    <div class="media">
-      <div class="media-body">
-        
+<div class='col-md-12'>
+<div class='js-comments'>
+  <%= render partial: 'comments/comment', collection: @comments %>
+</div>
+<div class='new-comment'>
+  <%= render 'comments/form' %>
+</div>
+</div>
+</div>
 
-        <p><%= comment.body %> <small><i>by <%= comment.user.name %></i>
-      <% if policy(comment).destroy? %>
-        | <%= link_to "Delete", [@post, comment], method: :delete %></small></p>
-      <% end %>
-      </div>
-    </div>
-    <% end %>
-<% if current_user %>
 
-<%= render partial: 'comments/comment', collection: @comments %>
-<% end %>
  
